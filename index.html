@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script type="text/javascript" async="" src="_files/analytics.js"></script><script async="" src="_files/js"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-132861133-1');
+        </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ESP-Modbus - ESP32 -  — ESP-IDF Programming Guide documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="_files/documentation_options.js"></script>
+        <script type="text/javascript" src="_files/jquery.js"></script>
+        <script type="text/javascript" src="_files/underscore.js"></script>
+        <script type="text/javascript" src="_files/doctools.js"></script>
+        <script type="text/javascript" src="_files/language_data.js"></script>
+        <script type="text/javascript" src="_files/clipboard.js"></script>
+        <script type="text/javascript" src="_files/copybutton.js"></script>
+      <script type="text/javascript" src="_files/theme.js"></script>
+
+    
+
+
+    
+    <script type="text/javascript">
+        DOCUMENTATION_OPTIONS.PAGENAME = 'api-reference/protocols/modbus';
+        DOCUMENTATION_OPTIONS.PROJECT_SLUG = 'esp-idf';
+        DOCUMENTATION_OPTIONS.VERSIONS_URL = 'https://dl.espressif.com/dl/esp-idf/idf_versions.js';
+        DOCUMENTATION_OPTIONS.LANGUAGES = ["en", "zh_CN"];
+        DOCUMENTATION_OPTIONS.IDF_TARGET = 'esp32';
+        DOCUMENTATION_OPTIONS.HAS_IDF_TARGETS = ["esp32", "esp32s2", "esp32c3"]
+        DOCUMENTATION_OPTIONS.RELEASE = 'bugfix-modbus_doc_1641_fix_api_documentation';
+    </script>
+
+    <script type="text/javascript" src="_files/idf_versions.js"></script>
+
+  
+  <link rel="stylesheet" href="_files/theme.css" type="text/css">
+  <link rel="stylesheet" href="_files/pygments.css" type="text/css">
+  <link rel="stylesheet" href="_files/copybutton.css" type="text/css">
+  <link rel="stylesheet" href="_files/theme_overrides.css" type="text/css">
+    <link rel="author" title="About these documents" href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/about.html">
+    <link rel="index" title="Index" href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/genindex.html">
+    <link rel="search" title="Search" href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/search.html">
+    <link rel="next" title="ESP WebSocket Client" href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/protocols/esp_websocket_client.html">
+    <link rel="prev" title="mDNS Service" href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/protocols/mdns.html"> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          https://docs.espressif.com/projects/esp-idf/en/latest/
+
+          
+            <a href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/index.html" class="icon icon-home" alt="Documentation Home"> ESP-IDF Programming Guide
+          
+
+          
+            
+            <img src="_files/espressif-logo.svg" class="logo" alt="Logo">
+          
+          </a>
+
+          
+            <div class="selectors">
+              <select id="target-select" style="width: 150px;">
+                <option value="" disabled="disabled">Choose target...</option>
+              <option value="esp32" selected="selected">ESP32</option><option value="esp32s2">ESP32-S2</option><option value="esp32c3">ESP32-C3</option></select>
+            </div>
+          
+
+          <div class="selectors">
+            <select id="version-select" style="width: 150px;">
+              <option value="" disabled="disabled">Choose version...</option>
+            <option value="v4.3" data-has_target="true">stable (v4.3)</option><option value="v4.2.2" data-has_target="true">v4.2.2</option><option value="v4.1.2" data-has_target="false">v4.1.2</option><option value="v4.0.3" data-has_target="false">v4.0.3</option><option value="v3.3.5" data-has_target="false">v3.3.5</option><option value="" disabled="disabled">Pre-Release Versions</option><option value="latest" data-has_target="true">master (latest)</option><option value="release-v4.3" data-has_target="true">release/v4.3</option><option value="release-v4.2" data-has_target="true">release/v4.2</option><option value="release-v4.1" data-has_target="false">release/v4.1</option><option value="release-v4.0" data-has_target="false">release/v4.0</option><option value="release-v3.3" data-has_target="false">release/v3.3</option><option value="bugfix-modbus_doc_1641_fix_api_documentation" selected="selected">bugfix-modbus_doc_1641_fix_api_documentation</option></select>
+          </div>
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs">
+    <input type="hidden" name="check_keywords" value="yes">
+    <input type="hidden" name="area" value="default">
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/index.html"><span class="toctree-expand"></span>API Reference</a><ul class="">
+<li class="toctree-l2"><a class="reference internal" href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/index.html">Bluetooth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/index.html">Networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/index.html">Peripherals</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/protocols/index.html"><span class="toctree-expand"></span>Protocols</a><ul class="">
+<li class="toctree-l3"><a class="reference internal" href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/protocols/asio.html">ASIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/protocols/mqtt.html">ESP-MQTT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/protocols/esp_tls.html">ESP-TLS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/protocols/openssl_apis.html">OpenSSL APIs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/protocols/esp_http_client.html">HTTP Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/protocols/esp_http_server.html">HTTP Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/protocols/esp_https_server.html">HTTPS Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/protocols/icmp_echo.html">ICMP Echo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/protocols/esp_local_ctrl.html">Local Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/protocols/mdns.html">mDNS</a></li>
+<li class="toctree-l3 current"><a class="reference internal current" href="#"><span class="toctree-expand"></span>Modbus</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modbus-messaging-model-and-data-mapping">Modbus messaging model and data mapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modbus-master-api-overview">Modbus master API overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modbus-slave-api-overview">Modbus slave API overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#possible-communication-issues-and-solutions">Possible communication issues and solutions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#application-example">Application Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#protocol-references">Protocol references</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api-reference">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/protocols/esp_websocket_client.html">Websocket Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/protocols/esp_serial_slave_link.html">ESP Serial Slave Link</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/protocols/esp_crt_bundle.html">Certificate Bundle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/protocols/index.html#ip-network-layer">IP Network Layer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/provisioning/index.html">Provisioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/storage/index.html">Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/index.html">System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/kconfig.html">Configuration Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/error-codes.html">Error Codes Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/hw-reference/index.html">H/W Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/libraries-and-frameworks/index.html">Libraries and Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/contribute/index.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/versions.html">Versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/COPYRIGHT.html">Copyrights</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/languages.html">语言/Languages</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/index.html">ESP-IDF Programming Guide</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/index.html" class="icon icon-home"></a> »</li>
+        
+          <li><a href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/index.html">API Reference</a> »</li>
+        
+          <li><a href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/protocols/index.html">Application Protocols</a> »</li>
+        
+      <li>ESP-Modbus</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/espressif/esp-idf/blob/0009392/docs/en/api-reference/protocols/modbus.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="esp-modbus">
+<h1>ESP-Modbus<a class="headerlink" href="#esp-modbus" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The Modbus serial communication protocol is de facto standard 
+protocol widely used to connect industrial electronic devices. Modbus 
+allows communication among many devices connected to the same network, 
+for example, a system that measures temperature and humidity and 
+communicates the results to a computer. The Modbus protocol uses several
+ types of data: Holding Registers, Input Registers, Coils (single bit 
+output), Discrete Inputs. Versions of the Modbus protocol exist for 
+serial port and for Ethernet and other protocols that support the 
+Internet protocol suite.
+There are many variants of Modbus protocols, some of them are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Modbus</span> <span class="pre">RTU</span></code>
+ — This is used in serial communication and makes use of a compact, 
+binary representation of the data for protocol communication. The RTU 
+format follows the commands/data with a cyclic redundancy check checksum
+ as an error check mechanism to ensure the reliability of data. Modbus 
+RTU is the most common implementation available for Modbus. A Modbus RTU
+ message must be transmitted continuously without inter-character 
+hesitations. Modbus messages are framed (separated) by idle (silent) 
+periods. The RS-485 interface communication is usually used for this 
+type.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Modbus</span> <span class="pre">ASCII</span></code>
+ — This is used in serial communication and makes use of ASCII 
+characters for protocol communication. The ASCII format uses a 
+longitudinal redundancy check checksum. Modbus ASCII messages are framed
+ by leading colon (“:”) and trailing newline (CR/LF).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Modbus</span> <span class="pre">TCP/IP</span> <span class="pre">or</span> <span class="pre">Modbus</span> <span class="pre">TCP</span></code>
+ — This is a Modbus variant used for communications over TCP/IP 
+networks, connecting over port 502. It does not require a checksum 
+calculation, as lower layers already provide checksum protection.</p></li>
+</ul>
+</div></blockquote>
+<p>The following documentation and code requires some familarity with the Modbus technology and its specifics.
+Refer to  Modbus Organization with protocol specifications</p>
+</div>
+<div class="section" id="modbus-messaging-model-and-data-mapping">
+<h2>Modbus messaging model and data mapping<a class="headerlink" href="#modbus-messaging-model-and-data-mapping" title="Permalink to this headline">¶</a></h2>
+<p>Modbus is an application protocol or messaging structure that defines
+ rules for organizing and interpreting data independent of the data 
+transmission medium.
+Traditional serial Modbus is a register-based protocol that defines 
+message transactions that occur between masters and slaves.
+Slave devices listen for communication from the master and simply 
+respond as instructed.
+The master always controls the communication and may communicate 
+directly to one slave, or all connected slaves, but the slaves cannot 
+communicate directly with each other.</p>
+<div class="align-center figure" id="id1">
+<a class="reference internal image-reference" href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/_images/modbus-segment.png"><img alt="Modbus segment diagram" src="_files/modbus-segment.png" style="width: 464.8px; height: 400.8px;"></a>
+<p class="caption"><span class="caption-text">Modbus segment diagram</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is supposed that the number of slaves and its register map are known for the Modbus network before start of stack.</p>
+</div>
+<p>The register map of slave devices is usually part of device manual. 
+Slave device usually also allows to configure its short slave address 
+and communication options in the segment.</p>
+<p>Modbus protocol allows to map device data using tree types of 
+registers (Holding, Input, Discrete, Coil). The approach is shown on 
+picture below:</p>
+<div class="align-center figure" id="id2">
+<a class="reference internal image-reference" href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/_images/modbus-data-mapping.png"><img alt="Modbus data mapping" src="_files/modbus-data-mapping.png" style="width: 722.4000000000001px; height: 380.0px;"></a>
+<p class="caption"><span class="caption-text">Modbus data mapping</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<p>Refer to following sections to setup your Modbus slave and master accordingly:</p>
+<p><a class="reference internal" href="#modbus-api-slave-overview"><span class="std std-ref">Modbus slave API overview</span></a></p>
+<p><a class="reference internal" href="#modbus-api-master-overview"><span class="std std-ref">Modbus master API overview</span></a></p>
+<div class="section" id="modbus-port-initialization">
+<span id="modbus-api-port-initialization"></span><h3>Modbus port initialization<a class="headerlink" href="#modbus-port-initialization" title="Permalink to this headline">¶</a></h3>
+<p>The ESP_Modbus supports Modbus SERIAL and TCP ports and its initialization must be done before call to other API.
+The functions below are used to create and then initialize Modbus master controller interface for Serial/TCP port accordingly:</p>
+<p><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">mbc_slave_init()</span></code></p>
+<p><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">mbc_master_init()</span></code></p>
+<p><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">mbc_slave_init_tcp()</span></code></p>
+<p><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">mbc_master_init_tcp()</span></code></p>
+<p>The API call uses the first parameter to recognize the type of port being initialized.
+Supported enumeration for different ports: <code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">MB_PORT_SERIAL_MASTER</span></code>, <code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">MB_PORT_SERIAL_SLAVE</span></code>, <code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">MB_PORT_TCP_MASTER</span></code>, <code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">MB_PORT_TCP_SLAVE</span></code> accordingly.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre id="codecell0"><span></span><span class="kt">void</span><span class="o">*</span> <span class="n">master_handler</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span> <span class="c1">// Pointer to allocate interface structure</span>
+
+<span class="n">esp_err_t</span> <span class="n">err</span> <span class="o">=</span> <span class="n">mbc_master_init</span><span class="p">(</span><span class="n">MB_PORT_SERIAL_MASTER</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">master_handler</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">master_handler</span> <span class="o">==</span> <span class="nb">NULL</span> <span class="o">||</span> <span class="n">err</span> <span class="o">!=</span> <span class="n">ESP_OK</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">ESP_LOGI</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span> <span class="s">"mb controller initialization fail."</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">ESP_ERR_INVALID_STATE</span><span class="p">;</span>
+<span class="p">}</span>
+</pre><a class="copybtn o-tooltip--left" style="background-color: rgba(0, 0, 0, 0)" data-tooltip="Copy" data-clipboard-target="#codecell0">
+      <img src="_files/copy-button.svg" alt="Copy to clipboard">
+    </a></div>
+</div>
+<p>This example code can be easily modified to initialize slave port:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre id="codecell1"><span></span><span class="kt">void</span><span class="o">*</span> <span class="n">slave_handler</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span> <span class="c1">// Pointer to allocate interface structure</span>
+
+<span class="n">esp_err_t</span> <span class="n">err</span> <span class="o">=</span> <span class="n">mbc_slave_init</span><span class="p">(</span><span class="n">MB_PORT_TCP_SLAVE</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">slave_handler</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">slave_handler</span> <span class="o">==</span> <span class="nb">NULL</span> <span class="o">||</span> <span class="n">err</span> <span class="o">!=</span> <span class="n">ESP_OK</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Error handling is performed here</span>
+    <span class="n">ESP_LOGE</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span> <span class="s">"mb controller initialization fail."</span><span class="p">);</span>
+<span class="p">}</span>
+</pre><a class="copybtn o-tooltip--left" style="background-color: rgba(0, 0, 0, 0)" data-tooltip="Copy" data-clipboard-target="#codecell1">
+      <img src="_files/copy-button.svg" alt="Copy to clipboard">
+    </a></div>
+</div>
+</div>
+</div>
+<div class="section" id="modbus-master-api-overview">
+<span id="modbus-api-master-overview"></span><h2>Modbus master API overview<a class="headerlink" href="#modbus-master-api-overview" title="Permalink to this headline">¶</a></h2>
+<p>The following overview describes how to setup Modbus master 
+communication. The overview reflects a typical programming workflow and 
+is broken down into the sections provided below:</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#modbus-api-port-initialization"><span class="std std-ref">Modbus port initialization</span></a> - Initialization of Modbus controller interface for the selected port.</p></li>
+<li><p><a class="reference internal" href="#modbus-api-master-configure-descriptor"><span class="std std-ref">Configure master data access</span></a> - Configure data descriptors to access slave parameters.</p></li>
+<li><p><a class="reference internal" href="#modbus-api-master-setup-communication-options"><span class="std std-ref">Master setup communication options</span></a> - Allows to setup communication options for selected port.</p></li>
+<li><p><a class="reference internal" href="#modbus-api-master-start-communication"><span class="std std-ref">Master start communication</span></a> - Start stack and sending / receiving data.</p></li>
+<li><p><a class="reference internal" href="#modbus-api-master-destroy"><span class="std std-ref">Modbus master destroy communication stack</span></a> - Destroy Modbus controller and its resources.</p></li>
+</ol>
+<div class="section" id="configure-master-data-access">
+<span id="modbus-api-master-configure-descriptor"></span><h3>Configure master data access<a class="headerlink" href="#configure-master-data-access" title="Permalink to this headline">¶</a></h3>
+<p>The architectural approach of ESP_Modbus includes one level above 
+standard Modbus IO driver.
+The additional layer is called modbus controller and its goal is to add 
+an abstraction such as CID - characteristic identificator.
+The CID is linked to the corresponded Modbus registers through the table
+ called Data Dictionary and represents device physical parameter (such 
+as temperature, humidity, etc.) in specific Modbus slave device.
+This approach allows to isolate upper layer (MESH or MQTT for example) 
+from Modbus specifics and simplify Modbus integration with other 
+protocols/networks.</p>
+<p>The Data Dictionary is the list in the Modbus master which shall be 
+defined by user to link each corresponded CID to its Modbus registers 
+representation using Register Mapping table of the Modbus slave being 
+used.
+Each element in this data dictionary is of type <code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">mb_parameter_descriptor_t</span></code> and represents description of one physical characteristic:</p>
+<div class="wy-table-responsive"><table class="colwidths-given docutils align-default" id="id3">
+<caption><span class="caption-text">Table 1 Modbus master Data Dictionary description</span><a class="headerlink" href="#id3" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 8%">
+<col style="width: 10%">
+<col style="width: 82%">
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Detailed information</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>cid</p></td>
+<td><p>Characteristic ID</p></td>
+<td><p>The identifier of characteristic (must be unique).</p></td>
+</tr>
+<tr class="row-odd"><td><p>param_key</p></td>
+<td><p>Characteristic Name</p></td>
+<td><p>String description of the characteristic.</p></td>
+</tr>
+<tr class="row-even"><td><p>param_units</p></td>
+<td><p>Characteristic Units</p></td>
+<td><p>Physical Units of the characteristic.</p></td>
+</tr>
+<tr class="row-odd"><td><p>mb_slave_addr</p></td>
+<td><p>Modbus Slave Address</p></td>
+<td><p>The short address of the device with correspond parameter UID.</p></td>
+</tr>
+<tr class="row-even"><td><p>mb_param_type</p></td>
+<td><p>Modbus Register Type</p></td>
+<td><p>Type of Modbus register area.
+<code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">MB_PARAM_INPUT</span></code>, <code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">MB_PARAM_HOLDING</span></code>, <code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">MB_PARAM_COIL</span></code>, <code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">MB_PARAM_DISCRETE</span></code>  - represents Input , Holding, Coil and Discrete input register area accordingly;</p></td>
+</tr>
+<tr class="row-odd"><td><p>mb_reg_start</p></td>
+<td><p>Modbus Register Start</p></td>
+<td><p>Relative register address of the characteristic in the register area.</p></td>
+</tr>
+<tr class="row-even"><td><p>mb_size</p></td>
+<td><p>Modbus Register Size</p></td>
+<td><p>Length of characteristic in registers.</p></td>
+</tr>
+<tr class="row-odd"><td><p>param_offset</p></td>
+<td><p>Instance Offset</p></td>
+<td><p>Offset to instance of the characteristic in bytes. It is used to 
+calculate the absolute address to characteristic in the storage 
+structure.
+It is optional field to cache parameter data and can be set to zero if 
+the parameter not used in the application.</p></td>
+</tr>
+<tr class="row-even"><td><p>param_type</p></td>
+<td><p>Data Type</p></td>
+<td><p>Specifies type of the characteristic.
+<code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">PARAM_TYPE_U8</span></code>, <code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">PARAM_TYPE_U16</span></code>, <code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">PARAM_TYPE_U32</span></code> - Unsigned integer 8/16/32 bit type;
+<code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">PARAM_TYPE_FLOAT</span></code> - IEEE754 floating point format;
+<code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">PARAM_TYPE_ASCII</span></code> - ASCII string or binary data;</p></td>
+</tr>
+<tr class="row-odd"><td><p>param_size</p></td>
+<td><p>Data Size</p></td>
+<td><p>The storage size of the characteristic (bytes).</p></td>
+</tr>
+<tr class="row-even"><td><p>param_opts</p></td>
+<td><p>Parameter Options</p></td>
+<td><p>Limits, options of characteristic used during processing of alarm in user application (optional)</p></td>
+</tr>
+<tr class="row-odd"><td><p>access</p></td>
+<td><p>Parameter access type</p></td>
+<td><p>Can be used in user application to define the behavior of the characteristic during processing of data in user application;
+<code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">PAR_PERMS_READ_WRITE_TRIGGER</span></code>, <code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">PAR_PERMS_READ</span></code>, <code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">PAR_PERMS_READ_WRITE_TRIGGER</span></code>;</p></td>
+</tr>
+</tbody>
+</table></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The cid and param_key have to be unique. Please use the prefix to the
+ parameter key if you have several similar parameters in your register 
+map table.</p>
+</div>
+<div class="wy-table-responsive"><table class="colwidths-given docutils align-default" id="id4">
+<caption><span class="caption-text">Table 2 Example Register mapping table of Modbus slave</span><a class="headerlink" href="#id4" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 10%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 10%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 60%">
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>CID and Name</p></th>
+<th class="head"><p>Modbus
+register</p></th>
+<th class="head"><p>Length
+(bytes)</p></th>
+<th class="head"><p>Range</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Units</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0 - “Serial_number”</p></td>
+<td><p>30000</p></td>
+<td><p>4</p></td>
+<td><p>MAX_UINT</p></td>
+<td><p>U32</p></td>
+<td><p>Not defined</p></td>
+<td><p>Serial number of device (4 bytes) read-only</p></td>
+</tr>
+<tr class="row-odd"><td><p>1 - “Software_version”</p></td>
+<td><p>30002</p></td>
+<td><p>2</p></td>
+<td><p>MAX_UINT</p></td>
+<td><p>U16</p></td>
+<td><p>Not defined</p></td>
+<td><p>Software version (4 bytes) read-only</p></td>
+</tr>
+<tr class="row-even"><td><p>2 - “Temperature”</p></td>
+<td><p>40000</p></td>
+<td><p>4</p></td>
+<td><p>-20..40</p></td>
+<td><p>FLOAT</p></td>
+<td><p>DegC</p></td>
+<td><p>Room temperature in DegC. Writing a temperature value to this register for single point calibration</p></td>
+</tr>
+</tbody>
+</table></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre id="codecell2"><span></span><span class="c1">// Enumeration of modbus slave addresses accessed by master device</span>
+<span class="k">enum</span> <span class="p">{</span>
+    <span class="n">MB_DEVICE_ADDR1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">MB_DEVICE_ADDR2</span><span class="p">,</span>
+    <span class="n">MB_SLAVE_COUNT</span>
+<span class="p">};</span>
+
+<span class="c1">// Enumeration of all supported CIDs for device</span>
+<span class="k">enum</span> <span class="p">{</span>
+    <span class="n">CID_SER_NUM1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">CID_SW_VER1</span><span class="p">,</span>
+    <span class="n">CID_TEMP_DATA_1</span><span class="p">,</span>
+    <span class="n">CID_SER_NUM2</span><span class="p">,</span>
+    <span class="n">CID_SW_VER2</span><span class="p">,</span>
+    <span class="n">CID_TEMP_DATA_2</span>
+<span class="p">};</span>
+
+<span class="c1">// Example Data (Object) Dictionary for Modbus parameters (Holding registers 0 and 1)</span>
+<span class="n">mb_parameter_descriptor_t</span> <span class="n">device_parameters</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// CID, Name, Units, Modbus addr, register type, Modbus Reg Start Addr, Modbus Reg read length,</span>
+    <span class="c1">// Instance offset (NA), Instance type, Instance length (bytes), Options (NA), Permissions</span>
+    <span class="p">{</span> <span class="n">CID_SER_NUM1</span><span class="p">,</span> <span class="n">STR</span><span class="p">(</span><span class="s">"Serial_number_1"</span><span class="p">),</span> <span class="n">STR</span><span class="p">(</span><span class="s">"--"</span><span class="p">),</span> <span class="n">MB_DEVICE_ADDR1</span><span class="p">,</span> <span class="n">MB_PARAM_INPUT</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span>
+                    <span class="mi">0</span><span class="p">,</span> <span class="n">PARAM_TYPE_U32</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">OPTS</span><span class="p">(</span> <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span> <span class="p">),</span> <span class="n">PAR_PERMS_READ_WRITE_TRIGGER</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="n">CID_SW_VER1</span><span class="p">,</span> <span class="n">STR</span><span class="p">(</span><span class="s">"Software_version_1"</span><span class="p">),</span> <span class="n">STR</span><span class="p">(</span><span class="s">"--"</span><span class="p">),</span> <span class="n">MB_DEVICE_ADDR1</span><span class="p">,</span> <span class="n">MB_PARAM_INPUT</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>
+                    <span class="mi">0</span><span class="p">,</span> <span class="n">PARAM_TYPE_U16</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">OPTS</span><span class="p">(</span> <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span> <span class="p">),</span> <span class="n">PAR_PERMS_READ_WRITE_TRIGGER</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="n">CID_TEMP_DATA_1</span><span class="p">,</span> <span class="n">STR</span><span class="p">(</span><span class="s">"Temperature_1"</span><span class="p">),</span> <span class="n">STR</span><span class="p">(</span><span class="s">"C"</span><span class="p">),</span> <span class="n">MB_DEVICE_ADDR1</span><span class="p">,</span> <span class="n">MB_PARAM_HOLDING</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span>
+                    <span class="mi">0</span><span class="p">,</span> <span class="n">PARAM_TYPE_FLOAT</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">OPTS</span><span class="p">(</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">1</span> <span class="p">),</span> <span class="n">PAR_PERMS_READ_WRITE_TRIGGER</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="n">CID_SER_NUM2</span><span class="p">,</span> <span class="n">STR</span><span class="p">(</span><span class="s">"Serial_number_2"</span><span class="p">),</span> <span class="n">STR</span><span class="p">(</span><span class="s">"--"</span><span class="p">),</span> <span class="n">MB_DEVICE_ADDR2</span><span class="p">,</span> <span class="n">MB_PARAM_INPUT</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span>
+                    <span class="mi">0</span><span class="p">,</span> <span class="n">PARAM_TYPE_U32</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">OPTS</span><span class="p">(</span> <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span> <span class="p">),</span> <span class="n">PAR_PERMS_READ_WRITE_TRIGGER</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="n">CID_SW_VER2</span><span class="p">,</span> <span class="n">STR</span><span class="p">(</span><span class="s">"Software_version_2"</span><span class="p">),</span> <span class="n">STR</span><span class="p">(</span><span class="s">"--"</span><span class="p">),</span> <span class="n">MB_DEVICE_ADDR2</span><span class="p">,</span> <span class="n">MB_PARAM_INPUT</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>
+                    <span class="mi">0</span><span class="p">,</span> <span class="n">PARAM_TYPE_U16</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">OPTS</span><span class="p">(</span> <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span> <span class="p">),</span> <span class="n">PAR_PERMS_READ_WRITE_TRIGGER</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="n">CID_TEMP_DATA_2</span><span class="p">,</span> <span class="n">STR</span><span class="p">(</span><span class="s">"Temperature_2"</span><span class="p">),</span> <span class="n">STR</span><span class="p">(</span><span class="s">"C"</span><span class="p">),</span> <span class="n">MB_DEVICE_ADDR2</span><span class="p">,</span> <span class="n">MB_PARAM_HOLDING</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span>
+                    <span class="mi">0</span><span class="p">,</span> <span class="n">PARAM_TYPE_FLOAT</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">OPTS</span><span class="p">(</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">1</span> <span class="p">),</span> <span class="n">PAR_PERMS_READ_WRITE_TRIGGER</span> <span class="p">},</span>
+<span class="p">};</span>
+<span class="c1">// Calculate number of parameters in the table</span>
+<span class="kt">uint16_t</span> <span class="n">num_device_parameters</span> <span class="o">=</span> <span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">device_parameters</span><span class="p">)</span> <span class="o">/</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">device_parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">]));</span>
+</pre><a class="copybtn o-tooltip--left" style="background-color: rgba(0, 0, 0, 0)" data-tooltip="Copy" data-clipboard-target="#codecell2">
+      <img src="_files/copy-button.svg" alt="Copy to clipboard">
+    </a></div>
+</div>
+<p>During initialization of the stack a pointer to the Data Dictionary 
+(called descriptor) must be provided as the parameter of the function 
+below.
+<code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">mbc_master_set_descriptor()</span></code>: Initialization of master descriptor.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre id="codecell3"><span></span><span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">mbc_master_set_descriptor</span><span class="p">(</span><span class="o">&amp;</span><span class="n">device_parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">num_device_parameters</span><span class="p">));</span>
+</pre><a class="copybtn o-tooltip--left" style="background-color: rgba(0, 0, 0, 0)" data-tooltip="Copy" data-clipboard-target="#codecell3">
+      <img src="_files/copy-button.svg" alt="Copy to clipboard">
+    </a></div>
+</div>
+<p>The Data Dictionary can be initialized from SD card, MQTT or other 
+source before start of stack.
+Once the initialization and setup is done, Modbus controller allows to 
+read complex parameter from any slave included in descriptor table using
+ its CID.</p>
+</div>
+<div class="section" id="master-setup-communication-options">
+<span id="modbus-api-master-setup-communication-options"></span><h3>Master setup communication options<a class="headerlink" href="#master-setup-communication-options" title="Permalink to this headline">¶</a></h3>
+<p>The call to the setup function allows to define specific communication options for port.</p>
+<p><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">mbc_master_setup()</span></code></p>
+<p>The communication structure provided as a parameter is different for serial and TCP communication mode.</p>
+<p>Example setup for serial port:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre id="codecell4"><span></span><span class="n">mb_communication_info_t</span> <span class="n">comm_info</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="p">.</span><span class="n">port</span> <span class="o">=</span> <span class="n">MB_PORT_NUM</span><span class="p">,</span>        <span class="c1">// Serial port number</span>
+        <span class="p">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">MB_MODE_RTU</span><span class="p">,</span>        <span class="c1">// Modbus mode of communication (MB_MODE_RTU or MB_MODE_ASCII)</span>
+        <span class="p">.</span><span class="n">baudrate</span> <span class="o">=</span> <span class="mi">9600</span><span class="p">,</span>           <span class="c1">// Modbus communication baud rate</span>
+        <span class="p">.</span><span class="n">parity</span> <span class="o">=</span> <span class="n">MB_PARITY_NONE</span>    <span class="c1">// parity option for serial port</span>
+<span class="p">};</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">mbc_master_setup</span><span class="p">((</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">comm_info</span><span class="p">));</span>
+</pre><a class="copybtn o-tooltip--left" style="background-color: rgba(0, 0, 0, 0)" data-tooltip="Copy" data-clipboard-target="#codecell4">
+      <img src="_files/copy-button.svg" alt="Copy to clipboard">
+    </a></div>
+</div>
+<p>Modbus master TCP port requires additional definition of IP address table where number of addresses should be equal to
+number of unique slave addresses in master Modbus Data Dictionary:</p>
+<p>The order of IP address string corresponds to short slave address in the Data Dictionary.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre id="codecell5"><span></span><span class="cp">#define MB_SLAVE_COUNT 2 </span><span class="c1">// Number of slaves in the segment being accessed (as defined in Data Dictionary)</span>
+
+<span class="kt">char</span><span class="o">*</span> <span class="n">slave_ip_address_table</span><span class="p">[</span><span class="n">MB_SLAVE_COUNT</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">"192.168.1.2"</span><span class="p">,</span>     <span class="c1">// Address corresponds to UID1 and set to predefined value by user</span>
+    <span class="s">"192.168.1.3"</span><span class="p">,</span>     <span class="c1">// corresponds to UID2 in the segment</span>
+    <span class="nb">NULL</span>               <span class="c1">// end of table</span>
+<span class="p">};</span>
+
+<span class="n">mb_communication_info_t</span> <span class="n">comm_info</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">0</span> <span class="p">};</span>
+<span class="n">comm_info</span><span class="p">.</span><span class="n">ip_port</span> <span class="o">=</span> <span class="n">MB_TCP_PORT</span><span class="p">;</span>                    <span class="c1">// Modbus TCP port number (default = 502)</span>
+<span class="n">comm_info</span><span class="p">.</span><span class="n">ip_addr_type</span> <span class="o">=</span> <span class="n">MB_IPV4</span><span class="p">;</span>                   <span class="c1">// version of IP protocol</span>
+<span class="n">comm_info</span><span class="p">.</span><span class="n">ip_mode</span> <span class="o">=</span> <span class="n">MB_MODE_TCP</span><span class="p">;</span>                    <span class="c1">// Port communication mode</span>
+<span class="n">comm_info</span><span class="p">.</span><span class="n">ip_addr</span> <span class="o">=</span> <span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span><span class="n">slave_ip_address_table</span><span class="p">;</span>  <span class="c1">// assign table of IP addresses</span>
+<span class="n">comm_info</span><span class="p">.</span><span class="n">ip_netif_ptr</span> <span class="o">=</span> <span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span><span class="n">get_example_netif</span><span class="p">();</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">mbc_master_setup</span><span class="p">((</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">comm_info</span><span class="p">));</span>
+</pre><a class="copybtn o-tooltip--left" style="background-color: rgba(0, 0, 0, 0)" data-tooltip="Copy" data-clipboard-target="#codecell5">
+      <img src="_files/copy-button.svg" alt="Copy to clipboard">
+    </a></div>
+</div>
+<p>The slave IP addresses in the table can be assigned automatically using mdns service as described in the example.
+Refer to <a class="reference external" href="https://github.com/espressif/esp-idf/tree/0009392/examples/protocols/modbus/tcp/mb_tcp_master">protocols/modbus/tcp/mb_tcp_master</a> for more information.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>RS485 communication requires call to UART specific APIs to setup 
+communication mode and pins. Refer to .. 
+_uart-api-running-uart-communication: secion of UART documentation.</p>
+</div>
+</div>
+<div class="section" id="master-start-communication">
+<span id="modbus-api-master-start-communication"></span><h3>Master start communication<a class="headerlink" href="#master-start-communication" title="Permalink to this headline">¶</a></h3>
+<p>The start of modbus controller is the final step that allows communication. This is performed using function below:</p>
+<p><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">mbc_master_start()</span></code></p>
+<div class="highlight-c notranslate"><div class="highlight"><pre id="codecell6"><span></span><span class="n">esp_err_t</span> <span class="n">err</span> <span class="o">=</span> <span class="n">mbc_master_start</span><span class="p">();</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">err</span> <span class="o">!=</span> <span class="n">ESP_OK</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">ESP_LOGE</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span> <span class="s">"mb controller start fail, err=%x."</span><span class="p">,</span> <span class="n">err</span><span class="p">);</span>
+<span class="p">}</span>
+</pre><a class="copybtn o-tooltip--left" style="background-color: rgba(0, 0, 0, 0)" data-tooltip="Copy" data-clipboard-target="#codecell6">
+      <img src="_files/copy-button.svg" alt="Copy to clipboard">
+    </a></div>
+</div>
+<p>Below are the interface API functions that are used by Modbus master stack from user application:</p>
+<p><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">mbc_master_send_request()</span></code></p>
+<p>This function sends data request as defined in parameter request structure <code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">mb_param_request_t</span></code>,
+ waits response from corresponded slave and returns status of command 
+execution. This function provides a standard way for read/write access 
+to Modbus devices in the network.</p>
+<p><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">mbc_master_get_cid_info()</span></code></p>
+<p>The function gets information about supported characteristic defined 
+as cid from data dictionary. It will check if characteristic is 
+supported and returns its description as the <code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">mb_parameter_descriptor_t</span></code> structure.</p>
+<p><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">mbc_master_get_parameter()</span></code></p>
+<p>The function reads data of characteristic defined in parameters from 
+Modbus slave device and returns its data. The additional data for 
+request is taken from parameter description table.</p>
+<p>Example:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre id="codecell7"><span></span><span class="k">const</span> <span class="n">mb_parameter_descriptor_t</span><span class="o">*</span> <span class="n">param_descriptor</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="kt">uint8_t</span> <span class="n">temp_data</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span> <span class="c1">// temporary buffer</span>
+<span class="kt">uint8_t</span> <span class="n">type</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">....</span>
+
+<span class="c1">// Get the information for characteristic cid from data dictionary</span>
+<span class="n">esp_err_t</span> <span class="n">err</span> <span class="o">=</span> <span class="n">mbc_master_get_cid_info</span><span class="p">(</span><span class="n">cid</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">param_descriptor</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">((</span><span class="n">err</span> <span class="o">!=</span> <span class="n">ESP_ERR_NOT_FOUND</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">param_descriptor</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">ESP_LOGE</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span> <span class="s">"Could not get information for characteristic %d."</span><span class="p">,</span> <span class="n">cid</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">err</span> <span class="o">=</span> <span class="n">mbc_master_get_parameter</span><span class="p">(</span><span class="n">param_descriptor</span><span class="o">-&gt;</span><span class="n">cid</span><span class="p">,</span> <span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">param_descriptor</span><span class="o">-&gt;</span><span class="n">param_key</span><span class="p">,</span> <span class="p">(</span><span class="kt">uint8_t</span><span class="o">*</span><span class="p">)</span><span class="n">temp_data</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">type</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">err</span> <span class="o">==</span> <span class="n">ESP_OK</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">ESP_LOGI</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span> <span class="s">"Characteristic #%d %s (%s) value = (0x%08x) read successful."</span><span class="p">,</span>
+                         <span class="n">param_descriptor</span><span class="o">-&gt;</span><span class="n">cid</span><span class="p">,</span>
+                         <span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">param_descriptor</span><span class="o">-&gt;</span><span class="n">param_key</span><span class="p">,</span>
+                         <span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">param_descriptor</span><span class="o">-&gt;</span><span class="n">param_units</span><span class="p">,</span>
+                         <span class="o">*</span><span class="p">(</span><span class="kt">uint32_t</span><span class="o">*</span><span class="p">)</span><span class="n">temp_data</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">ESP_LOGE</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span> <span class="s">"Characteristic #%d (%s) read fail, err = 0x%x (%s)."</span><span class="p">,</span>
+                        <span class="n">param_descriptor</span><span class="o">-&gt;</span><span class="n">cid</span><span class="p">,</span>
+                        <span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">param_descriptor</span><span class="o">-&gt;</span><span class="n">param_key</span><span class="p">,</span>
+                        <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">err</span><span class="p">,</span>
+                        <span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">esp_err_to_name</span><span class="p">(</span><span class="n">err</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre><a class="copybtn o-tooltip--left" style="background-color: rgba(0, 0, 0, 0)" data-tooltip="Copy" data-clipboard-target="#codecell7">
+      <img src="_files/copy-button.svg" alt="Copy to clipboard">
+    </a></div>
+</div>
+<p><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">mbc_master_set_parameter()</span></code></p>
+<p>The function writes characteristic’s value defined as a name and cid 
+parameter in corresponded slave device. The additional data for 
+parameter request is taken from master parameter description table.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre id="codecell8"><span></span><span class="kt">uint8_t</span> <span class="n">type</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Type of parameter</span>
+<span class="kt">uint8_t</span> <span class="n">temp_data</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span> <span class="c1">// temporary buffer</span>
+
+<span class="n">esp_err_t</span> <span class="n">err</span> <span class="o">=</span> <span class="n">mbc_master_set_parameter</span><span class="p">(</span><span class="n">CID_TEMP_DATA_2</span><span class="p">,</span> <span class="s">"Temperature_2"</span><span class="p">,</span> <span class="p">(</span><span class="kt">uint8_t</span><span class="o">*</span><span class="p">)</span><span class="n">temp_data</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">type</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">err</span> <span class="o">==</span> <span class="n">ESP_OK</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">ESP_LOGI</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span> <span class="s">"Set parameter data successfully."</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">ESP_LOGE</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span> <span class="s">"Set data fail, err = 0x%x (%s)."</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">err</span><span class="p">,</span> <span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">esp_err_to_name</span><span class="p">(</span><span class="n">err</span><span class="p">));</span>
+<span class="p">}</span>
+</pre><a class="copybtn o-tooltip--left" style="background-color: rgba(0, 0, 0, 0)" data-tooltip="Copy" data-clipboard-target="#codecell8">
+      <img src="_files/copy-button.svg" alt="Copy to clipboard">
+    </a></div>
+</div>
+</div>
+<div class="section" id="modbus-master-destroy-communication-stack">
+<span id="modbus-api-master-destroy"></span><h3>Modbus master destroy communication stack<a class="headerlink" href="#modbus-master-destroy-communication-stack" title="Permalink to this headline">¶</a></h3>
+<p>This function stops Modbus communication stack and destroys controller interface and free all used active objects.</p>
+<p><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">mbc_master_destroy()</span></code></p>
+<div class="highlight-c notranslate"><div class="highlight"><pre id="codecell9"><span></span><span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">mbc_master_destroy</span><span class="p">());</span>
+</pre><a class="copybtn o-tooltip--left" style="background-color: rgba(0, 0, 0, 0)" data-tooltip="Copy" data-clipboard-target="#codecell9">
+      <img src="_files/copy-button.svg" alt="Copy to clipboard">
+    </a></div>
+</div>
+</div>
+</div>
+<div class="section" id="modbus-slave-api-overview">
+<span id="modbus-api-slave-overview"></span><h2>Modbus slave API overview<a class="headerlink" href="#modbus-slave-api-overview" title="Permalink to this headline">¶</a></h2>
+<p>The sections below represent typical programming workflow for the slave API which should be called in following order:</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#modbus-api-port-initialization"><span class="std std-ref">Modbus port initialization</span></a> - Initialization of Modbus controller interface for the selected port.</p></li>
+<li><p><a class="reference internal" href="#modbus-api-slave-configure-descriptor"><span class="std std-ref">Slave configure data access</span></a> - Configure data descriptors to access slave parameters.</p></li>
+<li><p><a class="reference internal" href="#modbus-api-slave-setup-communication-options"><span class="std std-ref">Slave setup communication options</span></a> - Allows to setup communication options for selected port.</p></li>
+<li><p><a class="reference internal" href="#modbus-api-slave-start-communication"><span class="std std-ref">Slave start communication</span></a> - Start stack and sending / receiving data.</p></li>
+<li><p><a class="reference internal" href="#modbus-api-slave-filter-events"><span class="std std-ref">Slave communication API</span></a> - Filter events when master accesses the register areas.</p></li>
+<li><p><a class="reference internal" href="#modbus-api-slave-destroy"><span class="std std-ref">Slave destroy communication stack</span></a> - Destroy Modbus controller and its resources.</p></li>
+</ol>
+<div class="section" id="slave-configure-data-access">
+<span id="modbus-api-slave-configure-descriptor"></span><h3>Slave configure data access<a class="headerlink" href="#slave-configure-data-access" title="Permalink to this headline">¶</a></h3>
+<p>The following functions must be called when the Modbus controller slave port is already initialized. Refer to <a class="reference internal" href="#modbus-api-port-initialization"><span class="std std-ref">Modbus port initialization</span></a>.</p>
+<p>The slave stack requires the user defined structures (memory storage 
+areas) which keep Modbus parameters accessed by stack. These structures 
+should be prepared by user and be assigned to the Modbus controller 
+interface using <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">mbc_slave_set_descriptor()</span></code> API call before start of communication.
+The slave task can call the <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">mbc_slave_check_event()</span></code>
+ function and when the area defined in the descriptor is accessed by 
+Modbus master the slave is unblocked and can get information about data 
+being accessed.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>One slave can define several area descriptors per each type of Modbus register area with different start_offset.</p>
+</div>
+<p>Register area is defined by using the <code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">mb_register_area_descriptor_t</span></code> structure.</p>
+<div class="wy-table-responsive"><table class="colwidths-given docutils align-default" id="id5">
+<caption><span class="caption-text">Table 3 Modbus register area descriptor</span><a class="headerlink" href="#id5" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 8%">
+<col style="width: 92%">
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>start_offset</p></td>
+<td><p>Zero based register relative offset for defined register area. 
+Example: register address = 40002 ( 4x register area - Function 3 - 
+holding register ), start_offset = 2</p></td>
+</tr>
+<tr class="row-odd"><td><p>type</p></td>
+<td><p>Type of the Modbus register area. Refer to <code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">mb_param_type_t</span></code> for more information.</p></td>
+</tr>
+<tr class="row-even"><td><p>address</p></td>
+<td><p>The pointer to memory area which is used to store the register data for this area descriptor.</p></td>
+</tr>
+<tr class="row-odd"><td><p>size</p></td>
+<td><p>The size of the memory area in bytes which is used to store register data.</p></td>
+</tr>
+</tbody>
+</table></div>
+<p><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">mbc_slave_set_descriptor()</span></code></p>
+<p>The function initializes Modbus communication descriptors for each 
+type of Modbus register area (Holding Registers, Input Registers, Coils 
+(single bit output), Discrete Inputs). Once areas are initialized and 
+the <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">mbc_slave_start()</span></code> API is called the Modbus stack can access the data in user data structures by request from master.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre id="codecell10"><span></span><span class="cp">#define MB_REG_INPUT_START_AREA0    (0)</span>
+<span class="cp">#define MB_REG_HOLDING_START_AREA0  (0)</span>
+<span class="cp">#define MB_REG_HOLD_CNT             (100)</span>
+<span class="cp">#define MB_REG_INPUT_CNT            (100)</span>
+
+<span class="n">mb_register_area_descriptor_t</span> <span class="n">reg_area</span><span class="p">;</span> <span class="c1">// Modbus register area descriptor structure</span>
+<span class="n">unit16_t</span> <span class="n">holding_reg_area</span><span class="p">[</span><span class="n">MB_REG_HOLD_CNT</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span> <span class="c1">// storage area for holding registers</span>
+<span class="n">unit16_t</span> <span class="n">input_reg_area</span><span class="p">[</span><span class="n">MB_REG_INPUT_CNT</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span> <span class="c1">// storage area for input registers</span>
+
+<span class="n">reg_area</span><span class="p">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">MB_PARAM_HOLDING</span><span class="p">;</span>                               <span class="c1">// Set type of register area</span>
+<span class="n">reg_area</span><span class="p">.</span><span class="n">start_offset</span> <span class="o">=</span> <span class="n">MB_REG_HOLDING_START_AREA0</span><span class="p">;</span>             <span class="c1">// Offset of register area in Modbus protocol</span>
+<span class="n">reg_area</span><span class="p">.</span><span class="n">address</span> <span class="o">=</span> <span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">holding_reg_area</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>                 <span class="c1">// Set pointer to storage instance</span>
+<span class="n">reg_area</span><span class="p">.</span><span class="n">size</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">holding_reg_area</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">;</span>                  <span class="c1">// Set the size of register storage area in bytes</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">mbc_slave_set_descriptor</span><span class="p">(</span><span class="n">reg_area</span><span class="p">));</span>
+
+<span class="n">reg_area</span><span class="p">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">MB_PARAM_INPUT</span><span class="p">;</span>
+<span class="n">reg_area</span><span class="p">.</span><span class="n">start_offset</span> <span class="o">=</span> <span class="n">MB_REG_INPUT_START_AREA0</span><span class="p">;</span>
+<span class="n">reg_area</span><span class="p">.</span><span class="n">address</span> <span class="o">=</span> <span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">input_reg_area</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="n">reg_area</span><span class="p">.</span><span class="n">size</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">input_reg_area</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">mbc_slave_set_descriptor</span><span class="p">(</span><span class="n">reg_area</span><span class="p">));</span>
+</pre><a class="copybtn o-tooltip--left" style="background-color: rgba(0, 0, 0, 0)" data-tooltip="Copy" data-clipboard-target="#codecell10">
+      <img src="_files/copy-button.svg" alt="Copy to clipboard">
+    </a></div>
+</div>
+<p>At least one area descriptor per each Modbus register type must be set in order to provide register access to its area.
+If the master tries to access undefined area the stack will generate a Modbus exception.</p>
+<p>Direct access to register area from user application must be protected by critical section:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre id="codecell11"><span></span><span class="n">portENTER_CRITICAL</span><span class="p">(</span><span class="o">&amp;</span><span class="n">param_lock</span><span class="p">);</span>
+<span class="n">holding_reg_area</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="n">portEXIT_CRITICAL</span><span class="p">(</span><span class="o">&amp;</span><span class="n">param_lock</span><span class="p">);</span>
+</pre><a class="copybtn o-tooltip--left" style="background-color: rgba(0, 0, 0, 0)" data-tooltip="Copy" data-clipboard-target="#codecell11">
+      <img src="_files/copy-button.svg" alt="Copy to clipboard">
+    </a></div>
+</div>
+</div>
+<div class="section" id="slave-setup-communication-options">
+<span id="modbus-api-slave-setup-communication-options"></span><h3>Slave setup communication options<a class="headerlink" href="#slave-setup-communication-options" title="Permalink to this headline">¶</a></h3>
+<p>The function initializes the Modbus controller interface and its active context (tasks, RTOS objects and other resources).</p>
+<p><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">mbc_slave_setup()</span></code></p>
+<p>The function is used to setup communication parameters of the Modbus stack.</p>
+<p>Example initialization of Modbus TCP communication:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre id="codecell12"><span></span><span class="n">esp_netif_init</span><span class="p">();</span>
+
+<span class="n">mb_communication_info_t</span> <span class="n">comm_info</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">0</span> <span class="p">};</span>
+<span class="n">comm_info</span><span class="p">.</span><span class="n">ip_port</span> <span class="o">=</span> <span class="n">MB_TCP_PORT_NUMBER</span><span class="p">;</span>
+<span class="n">comm_info</span><span class="p">.</span><span class="n">ip_addr_type</span> <span class="o">=</span> <span class="n">MB_IPV4</span><span class="p">;</span>
+<span class="n">comm_info</span><span class="p">.</span><span class="n">ip_mode</span> <span class="o">=</span> <span class="n">MB_MODE_TCP</span><span class="p">;</span>                        <span class="c1">// Modbus TCp Mode</span>
+<span class="n">comm_info</span><span class="p">.</span><span class="n">ip_addr</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>                               <span class="c1">// This field keeps the client IP address to bind, NULL - bind to any client</span>
+<span class="n">comm_info</span><span class="p">.</span><span class="n">ip_netif_ptr</span> <span class="o">=</span> <span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span><span class="n">get_example_netif</span><span class="p">();</span>    <span class="c1">// Get netif interface pointer initialized in esp_netif_init()</span>
+<span class="c1">// Setup communication parameters and start stack</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">mbc_slave_setup</span><span class="p">((</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">comm_info</span><span class="p">));</span>
+</pre><a class="copybtn o-tooltip--left" style="background-color: rgba(0, 0, 0, 0)" data-tooltip="Copy" data-clipboard-target="#codecell12">
+      <img src="_files/copy-button.svg" alt="Copy to clipboard">
+    </a></div>
+</div>
+<p>Example initialization of Modbus serial communication:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre id="codecell13"><span></span><span class="c1">// Setup communication parameters and start stack</span>
+<span class="n">comm_info</span><span class="p">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">MB_MODE_RTU</span><span class="p">;</span>
+<span class="n">comm_info</span><span class="p">.</span><span class="n">slave_addr</span> <span class="o">=</span> <span class="n">MB_SLAVE_ADDR</span><span class="p">;</span>                   <span class="c1">// Short address of the slave</span>
+<span class="n">comm_info</span><span class="p">.</span><span class="n">port</span> <span class="o">=</span> <span class="n">MB_SLAVE_PORT_NUM</span><span class="p">;</span>                     <span class="c1">// UART physical port number</span>
+<span class="n">comm_info</span><span class="p">.</span><span class="n">baudrate</span> <span class="o">=</span> <span class="n">MB_SLAVE_DEV_SPEED</span><span class="p">;</span>                <span class="c1">// Baud rate for communication</span>
+<span class="n">comm_info</span><span class="p">.</span><span class="n">parity</span> <span class="o">=</span> <span class="n">MB_PARITY_NONE</span><span class="p">;</span>                      <span class="c1">// Parity option</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">mbc_slave_setup</span><span class="p">((</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">comm_info</span><span class="p">));</span>
+</pre><a class="copybtn o-tooltip--left" style="background-color: rgba(0, 0, 0, 0)" data-tooltip="Copy" data-clipboard-target="#codecell13">
+      <img src="_files/copy-button.svg" alt="Copy to clipboard">
+    </a></div>
+</div>
+</div>
+<div class="section" id="slave-start-communication">
+<span id="modbus-api-slave-start-communication"></span><h3>Slave start communication<a class="headerlink" href="#slave-start-communication" title="Permalink to this headline">¶</a></h3>
+<p>The function below is used to start Modbus controller interface and allows communication.</p>
+<p><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">mbc_slave_start()</span></code></p>
+<div class="highlight-c notranslate"><div class="highlight"><pre id="codecell14"><span></span><span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">mbc_slave_start</span><span class="p">());</span>
+</pre><a class="copybtn o-tooltip--left" style="background-color: rgba(0, 0, 0, 0)" data-tooltip="Copy" data-clipboard-target="#codecell14">
+      <img src="_files/copy-button.svg" alt="Copy to clipboard">
+    </a></div>
+</div>
+</div>
+<div class="section" id="slave-communication-api">
+<span id="modbus-api-slave-filter-events"></span><h3>Slave communication API<a class="headerlink" href="#slave-communication-api" title="Permalink to this headline">¶</a></h3>
+<p><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">mbc_slave_check_event()</span></code></p>
+<p>The blocking call to function waits for event specified in the input 
+parameter as event mask. Once master access the parameter and event mask
+ matches the parameter type the application task will be unblocked and 
+function will return corresponded event <code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">mb_event_group_t</span></code> which describe type of register access being done.</p>
+<p><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">mbc_slave_get_param_info()</span></code></p>
+<p>The function gets information about accessed parameters from modbus 
+controller event queue. The KConfig ‘FMB_CONTROLLER_NOTIFY_QUEUE_SIZE’ 
+key can be used to configure the notification queue size. The timeout 
+parameter allows to specify timeout for waiting notification. The <code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">mb_param_info_t</span></code> structure contain information about accessed parameter.</p>
+<div class="wy-table-responsive"><table class="colwidths-given docutils align-default" id="id6">
+<caption><span class="caption-text">Table 4 Description of the register info structure: <code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">mb_param_info_t</span></code></span><a class="headerlink" href="#id6" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 10%">
+<col style="width: 90%">
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>time_stamp</p></td>
+<td><p>the time stamp of the event when defined parameter is accessed</p></td>
+</tr>
+<tr class="row-odd"><td><p>mb_offset</p></td>
+<td><p>start Modbus register accessed by master</p></td>
+</tr>
+<tr class="row-even"><td><p>type</p></td>
+<td><p>type of the Modbus register area being accessed (See the <code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">mb_event_group_t</span></code> for more information)</p></td>
+</tr>
+<tr class="row-odd"><td><p>address</p></td>
+<td><p>memory address that corresponds to accessed register in defined area descriptor</p></td>
+</tr>
+<tr class="row-even"><td><p>size</p></td>
+<td><p>number of registers being accessed by master</p></td>
+</tr>
+</tbody>
+</table></div>
+<p>Example to get event when holding or input registers accessed in the slave:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre id="codecell15"><span></span><span class="cp">#define MB_READ_MASK            (MB_EVENT_INPUT_REG_RD | MB_EVENT_HOLDING_REG_RD)</span>
+<span class="cp">#define MB_WRITE_MASK           (MB_EVENT_HOLDING_REG_WR)</span>
+<span class="cp">#define MB_READ_WRITE_MASK      (MB_READ_MASK | MB_WRITE_MASK)</span>
+<span class="cp">#define MB_PAR_INFO_GET_TOUT    (10 / portTICK_RATE_MS)</span>
+<span class="p">....</span>
+
+<span class="c1">// The function blocks while waiting for register access</span>
+<span class="n">mb_event_group_t</span> <span class="n">event</span> <span class="o">=</span> <span class="n">mbc_slave_check_event</span><span class="p">(</span><span class="n">MB_READ_WRITE_MASK</span><span class="p">);</span>
+
+<span class="c1">// Get information about data accessed from master</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">mbc_slave_get_param_info</span><span class="p">(</span><span class="o">&amp;</span><span class="n">reg_info</span><span class="p">,</span> <span class="n">MB_PAR_INFO_GET_TOUT</span><span class="p">));</span>
+<span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">rw_str</span> <span class="o">=</span> <span class="p">(</span><span class="n">event</span> <span class="o">&amp;</span> <span class="n">MB_READ_MASK</span><span class="p">)</span> <span class="o">?</span> <span class="s">"READ"</span> <span class="o">:</span> <span class="s">"WRITE"</span><span class="p">;</span>
+
+<span class="c1">// Filter events and process them accordingly</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">event</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">MB_EVENT_HOLDING_REG_WR</span> <span class="o">|</span> <span class="n">MB_EVENT_HOLDING_REG_RD</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">ESP_LOGI</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span> <span class="s">"HOLDING %s (%u us), ADDR:%u, TYPE:%u, INST_ADDR:0x%.4x, SIZE:%u"</span><span class="p">,</span>
+                <span class="n">rw_str</span><span class="p">,</span>
+                <span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="n">reg_info</span><span class="p">.</span><span class="n">time_stamp</span><span class="p">,</span>
+                <span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="n">reg_info</span><span class="p">.</span><span class="n">mb_offset</span><span class="p">,</span>
+                <span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="n">reg_info</span><span class="p">.</span><span class="n">type</span><span class="p">,</span>
+                <span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="n">reg_info</span><span class="p">.</span><span class="n">address</span><span class="p">,</span>
+                <span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="n">reg_info</span><span class="p">.</span><span class="n">size</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">event</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">MB_EVENT_INPUT_REG_RD</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">ESP_LOGI</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span> <span class="s">"INPUT %s (%u us), ADDR:%u, TYPE:%u, INST_ADDR:0x%.4x, SIZE:%u"</span><span class="p">,</span>
+                <span class="n">rw_str</span><span class="p">,</span>
+                <span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="n">reg_info</span><span class="p">.</span><span class="n">time_stamp</span><span class="p">,</span>
+                <span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="n">reg_info</span><span class="p">.</span><span class="n">mb_offset</span><span class="p">,</span>
+                <span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="n">reg_info</span><span class="p">.</span><span class="n">type</span><span class="p">,</span>
+                <span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="n">reg_info</span><span class="p">.</span><span class="n">address</span><span class="p">,</span>
+                <span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="n">reg_info</span><span class="p">.</span><span class="n">size</span><span class="p">);</span>
+<span class="p">}</span>
+</pre><a class="copybtn o-tooltip--left" style="background-color: rgba(0, 0, 0, 0)" data-tooltip="Copy" data-clipboard-target="#codecell15">
+      <img src="_files/copy-button.svg" alt="Copy to clipboard">
+    </a></div>
+</div>
+</div>
+<div class="section" id="slave-destroy-communication-stack">
+<span id="modbus-api-slave-destroy"></span><h3>Slave destroy communication stack<a class="headerlink" href="#slave-destroy-communication-stack" title="Permalink to this headline">¶</a></h3>
+<p>This function stops Modbus communication stack and destroys 
+controller interface and free all used active objects allocated for 
+slave.</p>
+<p><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">mbc_slave_destroy()</span></code></p>
+<div class="highlight-c notranslate"><div class="highlight"><pre id="codecell16"><span></span><span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">mbc_slave_destroy</span><span class="p">());</span>
+</pre><a class="copybtn o-tooltip--left" style="background-color: rgba(0, 0, 0, 0)" data-tooltip="Copy" data-clipboard-target="#codecell16">
+      <img src="_files/copy-button.svg" alt="Copy to clipboard">
+    </a></div>
+</div>
+</div>
+</div>
+<div class="section" id="possible-communication-issues-and-solutions">
+<h2>Possible communication issues and solutions<a class="headerlink" href="#possible-communication-issues-and-solutions" title="Permalink to this headline">¶</a></h2>
+<p>If the examples do not work as expected and slave and master boards 
+are not able to communicate correctly it is possible to find the reason 
+for errors.
+The most important errors are described in master example output and 
+formatted as below:</p>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">E</span> <span class="pre">(1692332)</span> <span class="pre">MB_CONTROLLER_MASTER:</span> <span class="pre">mbc_master_get_parameter(111):</span> <span class="pre">SERIAL</span> <span class="pre">master</span> <span class="pre">get</span> <span class="pre">parameter</span> <span class="pre">failure</span> <span class="pre">error=(0x107)</span> <span class="pre">(ESP_ERR_TIMEOUT).</span>
+<span class="pre">`</span></code></p>
+<div class="wy-table-responsive"><table class="colwidths-given docutils align-default" id="id7">
+<caption><span class="caption-text">Table 5 Modbus error codes and troubleshooting</span><a class="headerlink" href="#id7" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 80%">
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Error enumerator</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Possible solution</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ESP_ERR_NOT_SUPPORTED (0x106)</p></td>
+<td><p>Invalid register request - slave returned an exception because the requested register is not supported.</p></td>
+<td><p>Refer to slave register map. Check the master data dictionary for correctness.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ESP_ERR_TIMEOUT (0x107)</p></td>
+<td><p>Response timeout - Modbus slave did not send response during configured timeout: <cite>CONFIG_FMB_MASTER_TIMEOUT_MS_RESPOND</cite></p></td>
+<td><p>Measure and increase maximum slave response timeout <cite>idf.py menuconfig</cite>, option <cite>CONFIG_FMB_MASTER_TIMEOUT_MS_RESPOND</cite>.
+Check physical connection or network configuration and make sure that the slave response can reach the master side.
+If the application has some high performance tasks with higher priority than <cite>CONFIG_FMB_PORT_TASK_PRIO</cite> it is recommended  to place Modbus tasks on other core using an option <cite>CONFIG_FMB_PORT_TASK_AFFINITY</cite>.
+Configure the Modbus tasks priority <cite>CONFIG_FMB_PORT_TASK_PRIO</cite> to let processing quota to Modbus stack tasks.</p></td>
+</tr>
+<tr class="row-even"><td><p>ESP_ERR_INVALID_RESPONSE (0x108)</p></td>
+<td><p>Received unsupported response from slave or frame check failure. 
+Master can not execute command handler because the command is not 
+supported or incorrect.</p></td>
+<td><p>Check the physical connection then refer to register map of your slave to configure the master data dictionary properly.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ESP_ERR_INVALID_STATE (0x103)</p></td>
+<td><p>Critical failure or FSM sequence failure or master FSM is busy processing previous request.</p></td>
+<td><p>Make sure your physical connection is working properly. Increase task stack size and check Modbus initialization sequence.</p></td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="section" id="application-example">
+<h2>Application Example<a class="headerlink" href="#application-example" title="Permalink to this headline">¶</a></h2>
+<p>The examples below use the FreeModbus library port for serial TCP 
+slave and master implementations accordingly. The selection of stack is 
+performed through KConfig menu option “Enable Modbus stack support …” 
+for appropriate communication mode and related configuration keys.</p>
+<p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/0009392/examples/protocols/modbus/serial/mb_slave">protocols/modbus/serial/mb_slave</a></p>
+<p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/0009392/examples/protocols/modbus/serial/mb_master">protocols/modbus/serial/mb_master</a></p>
+<p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/0009392/examples/protocols/modbus/tcp/mb_tcp_slave">protocols/modbus/tcp/mb_tcp_slave</a></p>
+<p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/0009392/examples/protocols/modbus/tcp/mb_tcp_master">protocols/modbus/tcp/mb_tcp_master</a></p>
+<p>Please refer to the specific example README.md for details.</p>
+</div>
+<div class="section" id="protocol-references">
+<h2>Protocol references<a class="headerlink" href="#protocol-references" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">https://modbus.org/specs.php</span></code>: Modbus organization with protocol specifications.</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="api-reference">
+<h2>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="header-files">
+<h3>Header Files<a class="headerlink" href="#header-files" title="Permalink to this headline">¶</a></h3>
+<p></p><ul class="simple">
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/blob/0009392/components/freemodbus/common/include/esp_modbus_common.h">freemodbus/common/include/esp_modbus_common.h</a></p></li>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/blob/0009392/components/freemodbus/common/include/esp_modbus_master.h">freemodbus/common/include/esp_modbus_master.h</a></p></li>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/blob/0009392/components/freemodbus/common/include/esp_modbus_slave.h">freemodbus/common/include/esp_modbus_slave.h</a></p></li>
+</ul>
+<p></p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+           <div class="articleComments">
+            
+<p style="text-align:center"><a href="https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&amp;sections=ESP-Modbus%20(api-reference/protocols/modbus)&amp;version=esp32%20bugfix-modbus_doc_1641_fix_api_documentation%20(v4.4-dev-2656-g0009392)">Provide feedback about this document</a></p>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/protocols/esp_websocket_client.html" class="btn btn-neutral float-right" title="ESP WebSocket Client" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/protocols/mdns.html" class="btn btn-neutral float-left" title="mDNS Service" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr>
+
+  <div role="contentinfo">
+    <p>
+        
+        © Copyright 2016 - 2021, Espressif Systems (Shanghai) Co., Ltd
+
+    </p>
+  </div>
+
+  <ul class="footer">
+    <li>
+      
+      
+      Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/espressif/sphinx_idf_theme">theme</a>  based on <a href="https://github.com/readthedocs/sphinx_rtd_theme">Read the Docs Sphinx Theme</a>.
+    </li>
+
+    <li class="footer-aside">
+        <a href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/esp-idf-en-v4.4-dev-2656-g0009392-esp32.pdf" class="fa fa-file-pdf-o"> Download PDF</a>
+    </li>
+
+  </ul> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+
+</body></html>
